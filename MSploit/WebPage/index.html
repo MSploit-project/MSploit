@@ -42,7 +42,8 @@
                         Add
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="AddId">
-                        <li><a class="dropdown-item" href="#">Target</a></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                data-bs-target="#addMenu">Target</a></li>
                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" 
                                data-bs-target="#scanMenu">Target and scan</a></li>
                     </ul>
@@ -103,28 +104,94 @@
     </div>
 </div>
 
+<!-- Add Menu -->
+<div class="modal fade" id="addMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Host</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="#" method="post">
+                <div class="modal-body ">
+                    <div class="form-group">
+                        <label for="ipfield">Ip:</label>
+                        <input type="text" class="form-control" name="host" id="ipfield" aria-describedby="helpId"
+                               placeholder="xxx.xxx.xxx.xxx">
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- Scan Menu -->
 <div class="modal fade" id="scanMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Settings</h5>
+                <h5 class="modal-title">Scan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body ">
-                <h3>Scan goes here...</h3>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            <form action="#" method="get">
+                <div class="modal-body ">
+                    <div class="form-group">
+                        <label for="ipScanField">Ip:</label>
+                        <input type="text" class="form-control" name="host" id="ipScanField" aria-describedby="helpId"
+                               placeholder="xxx.xxx.xxx.xxx">
+                    </div>
+                    <div class="form-group">
+                        <label for="scanType">Scan Type</label>
+                        <select class="form-control" name="scanType" id="scanType">
+                            <option value="">Pick an option</option>
+                            <option value="-sT">TCP</option>
+                            <option value="-sU">UDP</option>
+                            <option value="-sS">SYN (Stealth)</option>
+                            <option value="-sA">ACK</option>
+                        </select>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="fast" value="-F">
+                            Fast port scan
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="ver" value="-sV" checked>
+                            Service version detection
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="aggr" value="-A">
+                            Agressive Scan
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="osd" value="-O" checked>
+                            OS detect
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Scan</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 <main style="padding-top: 60px;padding-bottom: 60px;">
     <div class="list-group" style="display: grid;grid-template-columns: 1fr 1fr 1fr 1fr;gap: 10px;margin: 10px;">
-        <button type="button" href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white" style="border: 1px solid red;border-radius: 20px;">
+        <div type="button" href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white btn-group" style="border: 1px solid red;border-radius: 20px;">
             <div style="width: 100px;height: 100px;display: inline;background: url('Icons/Pcs/win-e.png');background-size: 100px;"></div>
             <div class="flex-column align-items-start">
                 <h5 class="mb-1">DESKTOP-YSB52SQ</h5>
@@ -136,9 +203,19 @@
                 Offline: color: red;
                 -->
             </div>
-        </button>
+            <div style="width: 50px;height: 50px;vertical-align: center;margin: auto">
+                <button style="width: 50px;height: 50px;vertical-align: center;margin: auto" type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#">Info</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item bg-danger" href="#">Remove</a></li>
+                </ul>
+            </div>
+        </div>
 
-        <button type="button" href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white" style="border: 1px solid black;border-radius: 20px">
+        <div type="button" href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white btn-group" style="border: 1px solid black;border-radius: 20px">
             <div style="width: 100px;height: 100px;display: inline;background: url('Icons/Pcs/win.png');background-size: 100px;"></div>
             <div class="flex-column align-items-start">
                 <h5 class="mb-1">DESKTOP-SKJ43SD</h5>
@@ -150,9 +227,19 @@
                 Offline: color: red;
                 -->
             </div>
-        </button>
+            <div style="width: 50px;height: 50px;vertical-align: center;margin: auto">
+                <button style="width: 50px;height: 50px;vertical-align: center;margin: auto" type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#">Info</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item bg-danger" href="#">Remove</a></li>
+                </ul>
+            </div>
+        </div>
 
-        <button type="button" href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white" style="border: 1px solid red;border-radius: 20px">
+        <div type="button" href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white btn-group" style="border: 1px solid red;border-radius: 20px">
             <div style="width: 100px;height: 100px;display: inline;background: url('Icons/Pcs/linux-e.png');background-size: 100px;"></div>
             <div class="flex-column align-items-start">
                 <h5 class="mb-1">Jake Pc</h5>
@@ -164,9 +251,20 @@
                 Offline: color: red;
                 -->
             </div>
-        </button>
 
-        <button type="button" href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white" style="border: 1px solid black;border-radius: 20px">
+            <div style="width: 50px;height: 50px;vertical-align: center;margin: auto">
+                <button style="width: 50px;height: 50px;vertical-align: center;margin: auto" type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#">Info</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item bg-danger" href="#">Remove</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div type="button" href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white btn-group" style="border: 1px solid black;border-radius: 20px">
             <div style="width: 100px;height: 100px;display: inline;background: url('Icons/Pcs/unix.png');background-size: 100px;"></div>
             <div class="flex-column align-items-start">
                 <h5 class="mb-1">NETGEAR Nighthawk</h5>
@@ -178,9 +276,20 @@
                 Offline: color: red;
                 -->
             </div>
-        </button>
 
-        <button type="button" href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white" style="border: 1px solid black;border-radius: 20px">
+            <div style="width: 50px;height: 50px;vertical-align: center;margin: auto">
+                <button style="width: 50px;height: 50px;vertical-align: center;margin: auto" type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#">Info</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item bg-danger" href="#">Remove</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div type="button" href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white btn-group" style="border: 1px solid black;border-radius: 20px">
             <div style="width: 100px;height: 100px;display: inline;background: url('Icons/Pcs/unix.png');background-size: 100px;"></div>
             <div class="flex-column align-items-start">
                 <h5 class="mb-1">TP-link Archer AX11000</h5>
@@ -192,14 +301,25 @@
                 Offline: color: red;
                 -->
             </div>
-        </button>
+
+            <div style="width: 50px;height: 50px;vertical-align: center;margin: auto">
+                <button style="width: 50px;height: 50px;vertical-align: center;margin: auto" type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#">Info</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item bg-danger" href="#">Remove</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </main>
 
 <footer class="bg-dark text-white fixed-bottom">
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         <a class="" style="color: red;">Offline</a>
-        <!-- 
+        <!--
          Online: color: lawngreen;
          Offline: color: red;
          -->
