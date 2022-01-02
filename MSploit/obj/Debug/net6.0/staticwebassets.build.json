@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "e3OlAOeXTQ40jU2YnDX6l7lpX6IHZU/JhAXfBVYGiYU=",
+  "Source": "MSploit",
+  "BasePath": "_content/MSploit",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
