@@ -15,6 +15,27 @@
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>
 
+    <style>
+        .computerlist{
+            grid-template-columns: repeat(1, 1fr);
+        }
+        @media (min-width: 800px) {
+            .computerlist{
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1200px) {
+            .computerlist{
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (min-width: 1600px) {
+            .computerlist{
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+
 </head>
 <body class="bg-dark">
 
@@ -193,7 +214,7 @@
 </div>
 
 <main style="padding-top: 60px;padding-bottom: 60px;">
-    <div class="list-group" style="display: grid;grid-template-columns: 1fr 1fr 1fr 1fr;gap: 10px;margin: 10px;">
+    <div class="list-group computerlist" style="display: grid;gap: 10px;margin: 10px;">
         <div href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white" style="border: 2px solid red;border-radius: 20px;cursor:default;">
             <div style="width: 100px;height: 100px;display: inline;background: url('Icons/Pcs/win-e.png');background-size: 95px;background-position: center; background-repeat: no-repeat;"></div>
             <div class="flex-column align-items-start">

@@ -19,7 +19,6 @@ public class NotificationsController
         Notification found = null;
         foreach (var notification in Notification.notifications)
         {
-            Console.WriteLine(notification.id);
             if (notification.id == id)
             {
                 exists = notification.id;
