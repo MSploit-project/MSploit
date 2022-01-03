@@ -11,17 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
       <Folder Include="WebPage\Icons" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="WebPage\style.css">
-        <DependentUpon>index.html</DependentUpon>
-      </None>
-      <None Update="WebPage\script.js">
-        <DependentUpon>index.html</DependentUpon>
-      </None>
     </ItemGroup>
 
 </Project>
