@@ -32,7 +32,7 @@
                         File
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="FileId">
-                        <li><a class="dropdown-item" href="#" onclick="serverStatus()">Check Server Status</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="serverCheck()">Check Server Status</a></li>
                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#settingsMenu">Settings</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Exit</a></li>
@@ -335,22 +335,20 @@
                 status.style.color = color
                 status.innerText = text
             }
-            function serverStatus(ping) {
+            function serverCheck(){
+                $.get("server/status")
+            }
+            function serverStatus() {
                 $.get(pingPath)
                 .done(function (){
-                    if (!ping) 
-                        alert(`server is online`)
                     setStatus(true)
                 })
                 .fail(function (){
-                    if (!ping)
-                        alert(`server is not online`)
                     setStatus(false)
                 })
-                if (ping)
-                    setTimeout(serverStatus, 500, ping)
+                setTimeout(serverStatus, 500)
             }
-            serverStatus(true)
+            serverStatus()
         </script>
         <!--
          Online: color: lawngreen;
@@ -377,12 +375,12 @@
                 var minutes = notif.minsSinceShown
                 var notid = notif.id
                 var notificationdata =  `
-<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
+<div class="toast show bg-dark text-white" role="alert" aria-live="assertive" aria-atomic="true" style="border: 1px solid black">
+    <div class="toast-header bg-dark" style="border-bottom: 1px solid grey; color: lightgray">
         <img src="" class="rounded me-2" alt="">
         <strong class="me-auto">${title}</strong>
         <small>${minutes} mins ago</small>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="$.post('server/notifications/${notid}/delete')"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close" onclick="$.post('server/notifications/${notid}/delete')"></button>
     </div>
     <div class="toast-body">
         ${content}
