@@ -33,14 +33,14 @@ public class HostsController : ControllerBase
     {
         if (!util.checkSession(Request)) return new UnauthorizedResult();
         string dir = $"{Directory.GetCurrentDirectory()}\\scans\\{host}.xml";
-        Notification.add("Nmap scan started!", host);
+        Notification.add("Nmap scan started!", $"Target: {host}");
         String command = $"{host} {scanType} {fast} {ver} {aggr} {osd} -oX \"{dir}\"";
-        Console.WriteLine($"Running Nmap {command}");
+        Console.WriteLine($"Running nmap.exe {command}");
         //TODO: scan through nmap
         new Thread(() =>
         {
             Directory.CreateDirectory($"{Directory.GetCurrentDirectory()}\\scans");
-            //util.runCmd(command);
+            util.runCmd("nmap.exe", command);
             util.updateHostFromScan(host, dir);
         }).Start();
         return new RedirectResult("/");

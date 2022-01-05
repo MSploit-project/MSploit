@@ -22,11 +22,13 @@ namespace MSploit.Objects
         public int id { get; set; }
         public String ip { get; set; }
         public bool up { get; set; }
-        public Dictionary<ushort, String> ports { get; set; }
+        public List<Port> ports { get; set; }
         public bool pwned { get; set; }
         public String lanIp { get; set; }
         public OS Os { get; set; }
         public String OsVer { get; set; }
+        public String HostName { get; set; }
+        
         public String OsString => Os switch
         {
             OS.linux => "Linux",
@@ -53,7 +55,7 @@ namespace MSploit.Objects
             this.lanIp = lanIp;
             this.Os = Os;
             this.pwned = pwned;
-            ports = new Dictionary<ushort, string>();
+            ports = new();
         }
         
         public Hosts(String ip, bool up, String lanIp, OS Os)
@@ -64,7 +66,7 @@ namespace MSploit.Objects
             this.lanIp = lanIp;
             this.Os = Os;
             pwned = false;
-            ports = new Dictionary<ushort, string>();
+            ports = new();
         }
         
         public Hosts(String ip, bool up, OS Os)
@@ -75,7 +77,7 @@ namespace MSploit.Objects
             lanIp = "xxx.xxx.xxx.xxx";
             this.Os = Os;
             pwned = false;
-            ports = new Dictionary<ushort, string>();
+            ports = new();
         }
         
         public Hosts(String ip, bool up, String lanIp)
@@ -86,7 +88,7 @@ namespace MSploit.Objects
             this.lanIp = lanIp;
             Os = OS.other_unknown;
             pwned = false;
-            ports = new Dictionary<ushort, string>();
+            ports = new();
         }
         
         public Hosts(String ip, bool up)
@@ -97,12 +99,20 @@ namespace MSploit.Objects
             lanIp = "xxx.xxx.xxx.xxx";
             Os = OS.other_unknown;
             pwned = false;
-            ports = new Dictionary<ushort, string>();
+            ports = new();
         }
 
         public Hosts()
         {
-            ports = new Dictionary<ushort, string>();
+            ports = new();
         }
+    }
+
+    public class Port
+    {
+        public string portNum { get; set; }
+        public string? service { get; set; }
+        public string? serviceProduct { get; set; }
+        public string protocol { get; set; }
     }
 }

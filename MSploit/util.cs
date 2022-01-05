@@ -13,11 +13,11 @@ namespace MSploit
 {
     public class util
     {
-        public static void runCmd(string command)
+        public static void runCmd(string program, string? command)
         {
             
-            ProcessStartInfo cmdsi = new ProcessStartInfo("nmap.exe");
-            cmdsi.Arguments = command;
+            ProcessStartInfo cmdsi = new ProcessStartInfo(program);
+            if (command != null) cmdsi.Arguments = command;
             cmdsi.UseShellExecute = false;
             Process? cmd = Process.Start(cmdsi);
             if (cmd != null) cmd.WaitForExit();
@@ -70,66 +70,70 @@ namespace MSploit
                 foreach (host host1 in result.Items)
                 {
                     Hosts found = new Hosts(host, true);
+                    bool alreadyIn = false;
                     foreach (var listHost in Hosts.List)
                     {
                         if (listHost.ip == host)
                         {
                             found = listHost;
+                            alreadyIn = true;
                             break;
                         }
                     }
 
+                    found.ip = host;
                     found.up = host1.status.state == statusState.up;
                     foreach (var item in host1.Items)
                     {
                         Type type = item.GetType();
                         switch (item)
                         {
-                            case tcptssequence tcpts:
-                                
-                                break;
-                            case ipidsequence ipid:
-                                
-                                break;
-                            case tcpsequence tcp:
-                                
-                                break;
-                            case distance dist:
-                                
-                                break;
-                            case uptime up:
-                                
-                                break;
                             case os osInfo:
                                 foreach (var match in osInfo.osmatch)
                                 {
                                     String s = "";
                                     foreach (osclass osClass in match.osclass)
                                     {
-                                        switch (osClass.osfamily)
+                                        found.Os = osClass.osfamily.ToLower() switch
                                         {
-                                            case "Linux":
-                                                break;
-                                            case "":
-                                                break;
-                                        }
+                                            "linux" => Hosts.OS.linux,
+                                            "windows" => Hosts.OS.win,
+                                            "macos" => Hosts.OS.osx,
+                                            _ => Hosts.OS.other_unknown
+                                        };
                                         break;
                                     }
+                                    break;
                                 }
                                 break;
                             case ports portInfo:
-                                
-                                break;
-                            case hostnames hostsInfo:
-                                
+                                found.ports = new();
+                                foreach (port portFound in portInfo.port)
+                                {
+                                    if (portFound.state.state1.ToLower() == "open")
+                                    {
+                                        Port addport = new Port();
+                                        addport.portNum = portFound.portid;
+                                        addport.protocol = portFound.protocol.ToString();
+                                        addport.service = portFound.service.name;
+                                        addport.serviceProduct = portFound.service.product;
+                                        found.ports.Add(addport);
+                                    }
+                                }
                                 break;
                             case address addr:
-                                found.ip = addr.addr;
+                                if (addr.addrtype == addressAddrtype.ipv4)
+                                {
+                                    found.ip = addr.addr;
+                                }
                                 break;
                         }
                     }
+
+                    if (!alreadyIn) Hosts.List.Add(found);
                 }
             }
+            Notification.add("Nmap done!", $"Nmap for {host} completed!");
         }
     }
 
