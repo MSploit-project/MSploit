@@ -55,8 +55,6 @@
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="FileId">
                         <li><a class="dropdown-item" href="#" onclick="serverCheck()">Check Server Status</a></li>
                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#settingsMenu">Settings</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Exit</a></li>
                     </ul>
                 </li>
 
@@ -137,7 +135,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="/hosts/new" method="get">
-                <div class="modal-body ">
+                <div class="modal-body">
                     <div class="form-group">
                         <label for="ipfield">Ip:</label>
                         <input type="text" class="form-control" name="host" id="ipfield" aria-describedby="helpId"
@@ -163,7 +161,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="/hosts/new/scan" method="get">
-                <div class="modal-body ">
+                <div class="modal-body">
                     <div class="form-group">
                         <label for="ipScanField">Ip:</label>
                         <input type="text" class="form-control" name="host" id="ipScanField" aria-describedby="helpId"
@@ -213,139 +211,129 @@
     </div>
 </div>
 
-<main style="padding-top: 60px;padding-bottom: 60px;">
-    <div class="list-group computerlist" style="display: grid;gap: 10px;margin: 10px;">
-        <div href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white" style="border: 2px solid red;border-radius: 20px;cursor:default;">
-            <div style="width: 100px;height: 100px;display: inline;background: url('Icons/Pcs/win-e.png');background-size: 95px;background-position: center; background-repeat: no-repeat;"></div>
-            <div class="flex-column align-items-start">
-                <h5 class="mb-1">DESKTOP-YSB52SQ</h5>
-                <p class="mb-1">Os: Windows 10 (x64)</p>
-                <small style="color: lawngreen;">Online</small>
-                <small>(231.211.53.154 -> 192.168.1.235)</small>
-                <!-- 
-                Online: color: lawngreen;
-                Offline: color: red;
-                -->
+<!-- info Menu -->
+<div class="modal fade" id="infoMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Info</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="dropstart" style="width: 50px;height: 100%;vertical-align: center;margin: auto; position: absolute;right: 0;top: 50%;transform: translateY(-50%)">
-                <button style="width: 100%;height: 100%;vertical-align: center;border-radius: 20px" type="button"
-                        class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#">Info</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item bg-danger" href="#">Remove</a></li>
+            <div class="modal-body">
+                <ul class="nav nav-pills mb-3" id="infotabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active"  data-bs-toggle="pill" data-bs-target="#info-main" type="button" role="tab" aria-controls="pills-home" aria-selected="true">General</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link"  data-bs-toggle="pill" data-bs-target="#info-ports" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Ports</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link"  data-bs-toggle="pill" data-bs-target="#info-vulns" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Vulns</button>
+                    </li>
                 </ul>
-            </div>
-        </div>
-
-        <div href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white" style="border: 2px solid black;border-radius: 20px;cursor:default;">
-            <div style="width: 100px;height: 100px;display: inline;background: url('Icons/Pcs/win.png');background-size: 95px;background-position: center; background-repeat: no-repeat;"></div>
-            <div class="flex-column align-items-start">
-                <h5 class="mb-1">DESKTOP-SKJ43SD</h5>
-                <p class="mb-1">Os: Windows 11 (x64)</p>
-                <small style="color: red;">Offline</small>
-                <small>(231.211.53.154)</small>
-                <!-- 
-                 Online: color: lawngreen;
-                 Offline: color: red;
-                 -->
-            </div>
-            <div class="dropstart" style="width: 50px;height: 100%;vertical-align: center;margin: auto; position: absolute;right: 0;top: 50%;transform: translateY(-50%)">
-                <button style="width: 100%;height: 100%;vertical-align: center;border-radius: 20px" type="button"
-                        class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#">Info</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item bg-danger" href="#">Remove</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white" style="border: 2px solid red;border-radius: 20px;cursor:default;">
-            <div style="width: 100px;height: 100px;display: inline;background: url('Icons/Pcs/linux-e.png');background-size: 95px;background-position: center; background-repeat: no-repeat;"></div>
-            <div class="flex-column align-items-start">
-                <h5 class="mb-1">Jake Pc</h5>
-                <p class="mb-1">Os: Ubuntu (x64)</p>
-                <small style="color: red;">Offline</small>
-                <small>(231.211.53.154 -> xxx.xxx.xxx.xxx)</small>
-                <!-- 
-                Online: color: lawngreen;
-                Offline: color: red;
-                -->
+                <div class="tab-content" id="infotabscontent">
+                    <div class="tab-pane fade show active" id="info-main" role="tabpanel" aria-labelledby="pills-general-tab">
+                        <ul id="infoList"></ul>
+                        <button href="#" data-bs-toggle="modal" data-bs-target="#scanMenu" class="btn btn-primary" type="button" 
+                                onclick="document.getElementById('ipScanField').value = document.getElementById('infoMenu').querySelector('.modal-title').innerHTML.substr(8)">Nmap Scan</button>
+                    </div>
+                    <div class="tab-pane fade" id="info-ports" role="tabpanel" aria-labelledby="pills-connections-tab">
+                        <h3>No ports list yet...</h3>
+                    </div>
+                    <div class="tab-pane fade" id="info-vulns" role="tabpanel" aria-labelledby="pills-plugins-tab">
+                        <h3>No vulns list yet...</h3>
+                    </div>
+                </div>
             </div>
 
-            <div class="dropstart" style="width: 50px;height: 100%;vertical-align: center;margin: auto; position: absolute;right: 0;top: 50%;transform: translateY(-50%)">
-                <button style="width: 100%;height: 100%;vertical-align: center;border-radius: 20px" type="button"
-                        class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#">Info</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item bg-danger" href="#">Remove</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white" style="border: 2px solid black;border-radius: 20px;cursor:default;">
-            <div style="width: 100px;height: 100px;display: inline;background: url('Icons/Pcs/unix.png');background-size: 95px;background-position: center; background-repeat: no-repeat;"></div>
-            <div class="flex-column align-items-start">
-                <h5 class="mb-1">NETGEAR Nighthawk</h5>
-                <p class="mb-1">Os: Unix (x64)</p>
-                <small style="color: lawngreen;">Online</small>
-                <small>(231.211.53.154)</small>
-                <!-- 
-                Online: color: lawngreen;
-                Offline: color: red;
-                -->
-            </div>
-
-            <div class="dropstart" style="width: 50px;height: 100%;vertical-align: center;margin: auto; position: absolute;right: 0;top: 50%;transform: translateY(-50%)">
-                <button style="width: 100%;height: 100%;vertical-align: center;border-radius: 20px" type="button"
-                        class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item" href="#">Info</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item bg-danger" href="#">Remove</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white" style="border: 2px solid black;border-radius: 20px;cursor:default;">
-            <div style="width: 100px;height: 100px;display: inline;background: url('Icons/Pcs/unix.png');background-size: 95px;background-position: center; background-repeat: no-repeat;"></div>
-            <div class="flex-column align-items-start">
-                <h5 class="mb-1">TP-link Archer AX11000</h5>
-                <p class="mb-1">Os: Unix (x64)</p>
-                <small style="color: lawngreen;">Online</small>
-                <small>(34.134.65.236)</small>
-                <!-- 
-                Online: color: lawngreen;
-                Offline: color: red;
-                -->
-            </div>
-
-            <div class="dropstart" style="width: 50px;height: 100%;vertical-align: center;margin: auto; position: absolute;right: 0;top: 50%;transform: translateY(-50%)">
-                <button style="width: 100%;height: 100%;vertical-align: center;border-radius: 20px" type="button"
-                    class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item" href="#">Info</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item bg-danger" href="#">Remove</a></li>
-                </ul>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
+
+<script>
+    let exampleModal = document.getElementById('infoMenu')
+    exampleModal.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        let button = event.relatedTarget
+        // Extract info from data-bs-* attributes
+        let host = button.getAttribute('data-bs-id')
+        // If necessary, you could initiate an AJAX request here
+        // and then do the updating in a callback.
+        //
+        // Update the modal's content.
+        let modalTitle = exampleModal.querySelector('.modal-title')
+        let infoList = exampleModal.querySelector('#infoList')
+        //let modalBodyInput = exampleModal.querySelector('.modal-body input')
+        
+        $.get(`/hosts/${host}`)
+        .done(function (data){
+            modalTitle.textContent = `info on ${data.ip}`
+            infoList.innerHTML = ""
+            function addListItem(text) { infoList.appendChild(document.createElement("li")).appendChild(document.createTextNode(text)) }
+            
+            addListItem("Ip: " + data.ip)
+            addListItem("Lan Ip: " + data.lanIp)
+            addListItem("Online last check: " + data.up)
+            addListItem("OS: " + data.osString)
+            addListItem("Pwned: " + data.pwned)
+        })
+        
+        //modalBodyInput.value = 
+    })
+
+</script>
+
+<main style="padding-top: 60px;padding-bottom: 60px;">
+    <div class="list-group computerlist" style="display: grid;gap: 10px;margin: 10px;" id="hostsContainer"></div>
 </main>
 
-<footer class="bg-dark text-white fixed-bottom" style="z-index: -1;">
+<script>
+    function updateHosts(){
+        $.get("/hosts")
+        .done(function (data){
+            const elem = document.getElementById("hostsContainer");
+            let allContent = "";
+            for (let i = 0; i < data.length; i++) {
+                const host = data[i];
+                const ip = host.ip, 
+                    up = host.up == true, 
+                    pwned = host.pwned, 
+                    lanip = host.lanip,
+                    Os = host.osString, 
+                    image = host.imageName,
+                    hostid = host.id;
+                const content = `
+<div href="#" class="list-group-item list-group-item-action d-flex bg-dark text-white" style="border: 2px solid ${pwned?"red":"black"};border-radius: 20px;cursor:default;">
+    <div style="width: 100px;height: 100px;display: inline;background: url('Icons/Pcs/${image}.png');background-size: 95px;background-position: center; background-repeat: no-repeat;"></div>
+    <div class="flex-column align-items-start">
+        <h5 class="mb-1">${ip}</h5>
+        <p class="mb-1">Os: ${Os}</p>
+        <small style="color: ${up?"lawngreen":"red"};">${up?"Online":"Offline"}</small>
+        <small>${lanip?"("+lanip+")":""}</small>
+        <!-- 
+        Online: color: lawngreen;
+        Offline: color: red;
+        -->
+    </div>
+
+    <button data-bs-id="${hostid}" data-bs-toggle="modal" data-bs-target="#infoMenu" type="button" class="btn-primary" style="border-radius: 10px;padding: 4px;position: absolute;right: 0;top: 0;outline: 1px solid black;width: 70px;">Info</button>
+    <button type="button" class="btn-dark" style="border-radius: 10px;padding: 4px;position: absolute;right: 0;top: 50%;transform: translateY(-50%);outline: 1px solid black;width: 70px;">Exploit</button>
+    <button onclick="$.post('/hosts/${hostid}/delete')" type="button" class="btn-danger" style="border-radius: 10px;padding: 4px;position: absolute;right: 0;bottom: 0;outline: 1px solid black;">Remove</button>
+</div>
+                `;
+                allContent += content
+            }
+            elem.innerHTML = allContent
+        })
+        setTimeout(updateHosts, 500)
+    }
+    updateHosts()
+</script>
+
+<footer class="bg-dark text-white fixed-bottom" style="">
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         <a id="serverStatus" class="" style="color: red;">Offline</a>
         <script>
@@ -380,37 +368,38 @@
     </div>
 </footer>
 
-<div class="toast-container position-absolute end-0 bottom-0" id="notifications" style="z-index: 10;transform: translateY(-20px)">
+<div class="toast-container position-fixed" id="notifications" style="z-index: 10;bottom: 60px;right: 10px">
     
 </div>
 <script>
     function updateNotifications(){
         $.get("/server/notifications")
         .done(function (data){
-            var elem = document.getElementById("notifications")
-            var allnotifications = "";
+            const elem = document.getElementById("notifications");
+            let allnotifications = "";
             for (let i = 0; i < data.length; i++) {
-                var notif = data[i]
-                var title = notif.title
-                var content = notif.content
-                var minutes = notif.minsSinceShown
-                var notid = notif.id
-                var notificationdata =  `
+                const notif = data[i]
+                const title = notif.title,
+                 content = notif.content,
+                 minutes = notif.minsSinceShown,
+                 notid = notif.id
+                const notificationdata = `
 <div class="toast show bg-dark text-white" role="alert" aria-live="assertive" aria-atomic="true" style="border: 1px solid black">
     <div class="toast-header bg-dark" style="border-bottom: 1px solid grey; color: lightgray">
         <img src="" class="rounded me-2" alt="">
         <strong class="me-auto">${title}</strong>
         <small>${minutes} mins ago</small>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close" onclick="$.post('server/notifications/${notid}/delete')"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close" onclick="$.post('/server/notifications/${notid}/delete')"></button>
     </div>
     <div class="toast-body">
         ${content}
     </div>
 </div>
-                `
+                `;
                 allnotifications += notificationdata
             }
-            elem.innerHTML = allnotifications
+            if (elem.innerHTML != allnotifications)
+                elem.innerHTML = allnotifications
         })
         setTimeout(updateNotifications, 500)
     }

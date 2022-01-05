@@ -5,7 +5,7 @@ namespace MSploit.Objects
 {
     public class Notification
     {
-        public static List<Notification> notifications = new List<Notification>(){};
+        public static List<Notification> notifications = new();
 
         public static void add(String name, String description) => notifications.Add(new Notification(name, description));
         

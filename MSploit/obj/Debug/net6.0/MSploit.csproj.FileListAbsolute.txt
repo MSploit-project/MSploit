@@ -25,3 +25,5 @@ C:\Users\milan\RiderProjects\MSploit\MSploit\obj\Debug\net6.0\MSploit.dll
 C:\Users\milan\RiderProjects\MSploit\MSploit\obj\Debug\net6.0\ref\MSploit.dll
 C:\Users\milan\RiderProjects\MSploit\MSploit\obj\Debug\net6.0\MSploit.pdb
 C:\Users\milan\RiderProjects\MSploit\MSploit\obj\Debug\net6.0\MSploit.genruntimeconfig.cache
+C:\Users\milan\RiderProjects\MSploit\MSploit\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\milan\RiderProjects\MSploit\MSploit\bin\Debug\net6.0\NmapXmlParser.dll

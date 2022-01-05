@@ -1,6 +1,7 @@
-using Microsoft.AspNetCore.Builder;
+using System.Threading;using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MSploit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,5 +26,15 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+new Thread(() =>
+{
+    util.load();
+    for (;;)
+    {
+        Thread.Sleep(3000);
+        util.save();
+    }    
+}).Start();
 
 app.Run();
