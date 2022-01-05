@@ -70,30 +70,20 @@
                                data-bs-target="#scanMenu">Target and scan</a></li>
                     </ul>
                 </li>
-
-                <!--Pivot-->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="PivotId" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Pivot
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="PivotId">
-                        <li><a class="dropdown-item" href="#">Disconnect from pivot</a></li>
-                    </ul>
-                </li>
             </ul>
         </div>
     </div>
 </nav>
 
 <!-- Settings Menu -->
-<div class="modal fade" id="settingsMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade text-white" id="settingsMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-dark">
                 <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body ">
+            <div class="modal-body bg-dark">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-general" type="button" role="tab" aria-controls="pills-home" aria-selected="true">General</button>
@@ -118,7 +108,7 @@
                 </div>
 
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer bg-dark">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
@@ -127,15 +117,15 @@
 </div>
 
 <!-- Add Menu -->
-<div class="modal fade" id="addMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade text-white" id="addMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-dark">
                 <h5 class="modal-title">Add Host</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="/hosts/new" method="get">
-                <div class="modal-body">
+                <div class="modal-body bg-dark">
                     <div class="form-group">
                         <label for="ipfield">Ip:</label>
                         <input type="text" class="form-control" name="host" id="ipfield" aria-describedby="helpId"
@@ -143,7 +133,7 @@
                     </div>
                 </div>
                 
-                <div class="modal-footer">
+                <div class="modal-footer bg-dark">
                     <button type="submit" class="btn btn-primary">Add</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
@@ -153,15 +143,15 @@
 </div>
 
 <!-- Scan Menu -->
-<div class="modal fade" id="scanMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade text-white" id="scanMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-dark">
                 <h5 class="modal-title">Scan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="/hosts/new/scan" method="get">
-                <div class="modal-body">
+                <div class="modal-body bg-dark">
                     <div class="form-group">
                         <label for="ipScanField">Ip:</label>
                         <input type="text" class="form-control" name="host" id="ipScanField" aria-describedby="helpId"
@@ -173,6 +163,7 @@
                             <option value="">Pick an option</option>
                             <option value="-sT">TCP</option>
                             <option value="-sU">UDP</option>
+                            <option value="-sU -sT">TCP/UDP</option>
                             <option value="-sS">SYN (Stealth)</option>
                             <option value="-sA">ACK</option>
                         </select>
@@ -202,7 +193,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-dark">
                     <button type="submit" class="btn btn-primary">Scan</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
@@ -212,14 +203,14 @@
 </div>
 
 <!-- info Menu -->
-<div class="modal fade" id="infoMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade text-white" id="infoMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Info</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title">Info on</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body bg-dark">
                 <ul class="nav nav-pills mb-3" id="infotabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active"  data-bs-toggle="pill" data-bs-target="#info-main" type="button" role="tab" aria-controls="pills-home" aria-selected="true">General</button>
@@ -238,15 +229,15 @@
                                 onclick="document.getElementById('ipScanField').value = document.getElementById('infoMenu').querySelector('.modal-title').innerHTML.substr(8)">Nmap Scan</button>
                     </div>
                     <div class="tab-pane fade" id="info-ports" role="tabpanel" aria-labelledby="pills-connections-tab">
-                        <h3>No ports list yet...</h3>
+                        <ul id="portsList"></ul>
                     </div>
                     <div class="tab-pane fade" id="info-vulns" role="tabpanel" aria-labelledby="pills-plugins-tab">
-                        <h3>No vulns list yet...</h3>
+                        
                     </div>
                 </div>
             </div>
 
-            <div class="modal-footer">
+            <div class="modal-footer bg-dark">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
@@ -254,8 +245,8 @@
 </div>
 
 <script>
-    let exampleModal = document.getElementById('infoMenu')
-    exampleModal.addEventListener('show.bs.modal', function (event) {
+    let infoModal = document.getElementById('infoMenu')
+    infoModal.addEventListener('show.bs.modal', function (event) {
         // Button that triggered the modal
         let button = event.relatedTarget
         // Extract info from data-bs-* attributes
@@ -264,26 +255,87 @@
         // and then do the updating in a callback.
         //
         // Update the modal's content.
-        let modalTitle = exampleModal.querySelector('.modal-title')
-        let infoList = exampleModal.querySelector('#infoList')
-        //let modalBodyInput = exampleModal.querySelector('.modal-body input')
+        let modalTitle = infoModal.querySelector('.modal-title')
+        let infoList = infoModal.querySelector('#infoList')
+        let portsList = infoModal.querySelector('#portsList')
         
         $.get(`/hosts/${host}`)
         .done(function (data){
-            modalTitle.textContent = `info on ${data.ip}`
-            infoList.innerHTML = ""
+            modalTitle.textContent = `Info on ${data.ip}`
+            infoList.innerHTML = portsList.innerHTML = ""//full clear
             function addListItem(text) { infoList.appendChild(document.createElement("li")).appendChild(document.createTextNode(text)) }
+            function addPort(info) { portsList.appendChild(document.createElement("li")).appendChild(document.createTextNode(info)) }
             
             addListItem("Ip: " + data.ip)
             addListItem("Lan Ip: " + data.lanIp)
             addListItem("Online last check: " + data.up)
             addListItem("OS: " + data.osString)
             addListItem("Pwned: " + data.pwned)
+
+            for (let p = 0; p < data.ports.length; p++) {
+                const port = data.ports[p]
+                const service = port.service,
+                    portNum = port.portNum,
+                    serviceProduct = port.serviceProduct,
+                    protocol = port.protocol
+                addPort(`${portNum}/${protocol}: ${service}, ${serviceProduct}`)
+            }
         })
         
         //modalBodyInput.value = 
     })
 
+</script>
+
+<!-- exploit Menu -->
+<div class="modal fade text-white" id="exploitMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title">Exploit: </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-dark" style="height: calc(100vh - 200px);">
+                <div id="editor" style="position: absolute;position: absolute;top: 0;right: 0;bottom: 0;left: 0;"></div>
+                <script src="https://pagecdn.io/lib/ace/1.4.13/ace.js" type="text/javascript" charset="utf-8"></script>
+                <script>
+                    var editor = ace.edit("editor");
+                    editor.setTheme("ace/theme/tomorrow_night");
+                    editor.session.setMode("ace/mode/python");
+                </script>
+            </div>
+
+            <div class="modal-footer bg-dark">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Run</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let exploitModal = document.getElementById('exploitMenu')
+    exploitModal.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        let button = event.relatedTarget
+        // Extract info from data-bs-* attributes
+        let host = button.getAttribute('data-bs-id')
+        let code = button.getAttribute('')
+        // If necessary, you could initiate an AJAX request here
+        // and then do the updating in a callback.
+        //
+        // Update the modal's content.
+        let modalTitle = exploitModal.querySelector('.modal-title')
+
+        $.get(`/hosts/${host}`)
+            .done(function (data){
+                modalTitle.textContent = `Exploit: ${data.ip} (You still have to fill the ip in the script)`
+                //TODO: code loading
+                editor.setValue("Exploiter coming soon", -1)
+            })
+
+        //modalBodyInput.value = 
+    })
 </script>
 
 <main style="padding-top: 60px;padding-bottom: 60px;">
@@ -320,7 +372,7 @@
     </div>
 
     <button data-bs-id="${hostid}" data-bs-toggle="modal" data-bs-target="#infoMenu" type="button" class="btn-primary" style="border-radius: 10px;padding: 4px;position: absolute;right: 0;top: 0;outline: 1px solid black;width: 70px;">Info</button>
-    <button type="button" class="btn-dark" style="border-radius: 10px;padding: 4px;position: absolute;right: 0;top: 50%;transform: translateY(-50%);outline: 1px solid black;width: 70px;">Exploit</button>
+    <button data-bs-id="${hostid}" data-bs-toggle="modal" data-bs-target="#exploitMenu" type="button" class="btn-dark" style="border-radius: 10px;padding: 4px;position: absolute;right: 0;top: 50%;transform: translateY(-50%);outline: 1px solid black;width: 70px;">Exploit</button>
     <button onclick="$.post('/hosts/${hostid}/delete')" type="button" class="btn-danger" style="border-radius: 10px;padding: 4px;position: absolute;right: 0;bottom: 0;outline: 1px solid black;">Remove</button>
 </div>
                 `;

@@ -101,6 +101,7 @@ namespace MSploit
                                             "macos" => Hosts.OS.osx,
                                             _ => Hosts.OS.other_unknown
                                         };
+                                        found.OsVer = osClass.osgen;
                                         break;
                                     }
                                     break;
@@ -110,7 +111,7 @@ namespace MSploit
                                 found.ports = new();
                                 foreach (port portFound in portInfo.port)
                                 {
-                                    if (portFound.state.state1.ToLower() == "open")
+                                    if (portFound.state.state1.ToLower().StartsWith("open"))
                                     {
                                         Port addport = new Port();
                                         addport.portNum = portFound.portid;

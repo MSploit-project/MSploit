@@ -19,7 +19,7 @@ namespace MSploit.Objects
         public static void add(String ip, bool online, String lanIp, OS Os) => List.Add(new Hosts(ip, online, lanIp, Os));
         public static void add(String ip, bool online, String lanIp, OS Os, bool pwned) => List.Add(new Hosts(ip, online, lanIp, Os, pwned));
 
-        public int id { get; set; }
+        public int id { get; }
         public String ip { get; set; }
         public bool up { get; set; }
         public List<Port> ports { get; set; }
@@ -104,6 +104,7 @@ namespace MSploit.Objects
 
         public Hosts()
         {
+            id = highestId++;
             ports = new();
         }
     }
