@@ -21,7 +21,7 @@ public class NormalPagesController : ControllerBase
         var validLogin = util.checkSession(Request);
         try
         {
-            var data = System.IO.File.ReadAllText(validLogin?@"C:\Users\milan\RiderProjects\MSploit\MSploit\WebPage\index.html":@"C:\Users\milan\RiderProjects\MSploit\MSploit\WebPage\login.html");//absolute path for now
+            var data = System.IO.File.ReadAllText(validLogin?$@"{Directory.GetCurrentDirectory()}\WebPage\index.html":$@"{Directory.GetCurrentDirectory()}\WebPage\login.html");
             return new ContentResult()
             {
                 Content = data,

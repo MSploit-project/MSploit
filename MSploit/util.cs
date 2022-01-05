@@ -86,22 +86,45 @@ namespace MSploit
                         switch (item)
                         {
                             case tcptssequence tcpts:
+                                
                                 break;
                             case ipidsequence ipid:
+                                
                                 break;
                             case tcpsequence tcp:
+                                
                                 break;
                             case distance dist:
+                                
                                 break;
                             case uptime up:
+                                
                                 break;
                             case os osInfo:
+                                foreach (var match in osInfo.osmatch)
+                                {
+                                    String s = "";
+                                    foreach (osclass osClass in match.osclass)
+                                    {
+                                        switch (osClass.osfamily)
+                                        {
+                                            case "Linux":
+                                                break;
+                                            case "":
+                                                break;
+                                        }
+                                        break;
+                                    }
+                                }
                                 break;
                             case ports portInfo:
+                                
                                 break;
                             case hostnames hostsInfo:
+                                
                                 break;
                             case address addr:
+                                found.ip = addr.addr;
                                 break;
                         }
                     }
