@@ -83,6 +83,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form action="/server/settings/set">
             <div class="modal-body bg-dark">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -97,7 +98,12 @@
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
-                        <h3>No settings yet...</h3>
+                        <div class="form-group">
+                            <label for="pyInterp">Python Interpreter</label>
+                            <input type="text" class="form-control bg-dark text-white" name="pyInterp" id="pyInterp" aria-describedby="helpId"
+                                   placeholder="">
+                            <small id="helpId" class="form-text text-muted">The command to run to run the python interpreter</small>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="pills-connections" role="tabpanel" aria-labelledby="pills-connections-tab">
                         <h3>No connection settings yet...</h3>
@@ -109,12 +115,23 @@
 
             </div>
             <div class="modal-footer bg-dark">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
+
+<script>
+    let settingsModal = document.getElementById('settingsMenu')
+    settingsModal.addEventListener('show.bs.modal', function (event) {
+        $.get("/server/settings")
+        .done(function (data){
+            document.getElementById("pyInterp").value = data.pyInterp
+        })
+    })
+</script>
 
 <!-- Add Menu -->
 <div class="modal fade text-white" id="addMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -232,7 +249,8 @@
                         <ul id="portsList"></ul>
                     </div>
                     <div class="tab-pane fade" id="info-vulns" role="tabpanel" aria-labelledby="pills-plugins-tab">
-                        
+                        <a target="_blank" href="https://www.exploit-db.com/" type="button" class="btn btn-primary">Visit exploit-db</a>
+                        <a target="_blank" href="https://vuldb.com/" type="button" class="btn btn-primary">Visit vuldb</a>
                     </div>
                 </div>
             </div>
@@ -306,7 +324,7 @@
             </div>
 
             <div class="modal-footer bg-dark">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Run</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="$.get('/script/run', {'script':editor.getValue()})">Run</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>

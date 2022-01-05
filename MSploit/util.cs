@@ -51,7 +51,7 @@ namespace MSploit
 
         public static void save()
         {
-            savedData data = new(Hosts.List, NormalPagesController.validAuth);
+            savedData data = new(Hosts.List, NormalPagesController.validAuth, Settings.settings);
             data.write();
         }
 
@@ -142,10 +142,12 @@ namespace MSploit
     {
         public List<Hosts> hosts { get; set; }
         public List<string> tokens { get; set; }
-        public savedData(List<Hosts> hosts, List<string> tokens)
+        public Settings settings { get; set; }
+        public savedData(List<Hosts> hosts, List<string> tokens, Settings settings)
         {
             this.hosts = hosts;
             this.tokens = tokens;
+            this.settings = settings;
         }
 
         public savedData()
@@ -163,6 +165,7 @@ namespace MSploit
                 {
                     Hosts.List = read.hosts;
                     NormalPagesController.validAuth = read.tokens;
+                    Settings.settings = read.settings;
                 }
             }
         }
