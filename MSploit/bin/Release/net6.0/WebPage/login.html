@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        
+        @keyframes rainbow {
+            0%{background: #ff0000}
+            14%{background: #9400D3}
+            28%{background: #4B0082}
+            42%{background: #0000FF}
+            56%{background: #00FF00}
+            75%{background: #FFFF00}
+            86%{background: #FF7F00}
+            100%{background: #ff0000}
+        }
+    </style>
+</head>
+<body style="background: rgb(33,37,41);font-family: Roboto;color: white">
+    <div style="position:absolute;left: 50%;top: 50%;width: 300px;height: 350px;transform: translate(-50%, -50%);outline: 1px solid grey;border-radius: 20px;overflow: hidden">
+        <div style="position: absolute;top: 0;width: 100%;height: 40px;animation-name: rainbow;animation-timing-function: linear;animation-duration: 20s;animation-iteration-count: infinite;text-align: center;background: #ff0000">
+            <a style="position:absolute;margin: auto;top: 50%;transform: translate(-50%, -50%);user-select: none;cursor: default;font-size: 25px">Log in...</a>
+        </div>
+        <form style="position: absolute;top: 40px;left: 50%;transform: translateX(-50%);bottom: 0;padding-top: 40px" action="/login">
+            <div>
+                <label for="username">Username</label><br>
+                <input type="text" name="name" id="username" placeholder="Username" style="margin-top: 10px;width: 250px;background: rgb(33,37,41);color: white;border: 1px solid grey;padding: 10px;font-size: 15px">
+            </div>
+            <br style="height: 10px">
+            <div>
+                <label for="password">Password</label><br>
+                <input type="password" name="pass" id="password" placeholder="Password" style="margin-top: 10px;width: 250px;background: rgb(33,37,41);color: white;border: 1px solid grey;padding: 10px;font-size: 15px">
+            </div>
+            <br>
+            <div style="left: 50%; position:absolute;transform: translateX(-50%); bottom: 20px;">
+                <input type="submit" value="Log In" style="padding: 10px 20px; background: rgb(33,37,41);color: white;border: 1px solid grey">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
