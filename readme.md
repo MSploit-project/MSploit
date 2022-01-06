@@ -1,6 +1,6 @@
-#MSploit
+# MSploit
 Exploitation tool
-##Features:
+## Features:
 * Web based ui (using jquery for ajax and bootstrap 5.1 for UI)
 * C# backend (using asp.net)
 * Authentication system (currently hardcoded user and password)
@@ -12,6 +12,6 @@ Exploitation tool
 * Python script runner
 * Reverse shell listener
 * Multiple reverse shells per port, multiple shells per host
-##Planned
+## Planned
 * Plugin system
 * Better remote control payload (through web requests)
