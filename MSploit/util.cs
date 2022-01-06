@@ -109,16 +109,19 @@ namespace MSploit
                                 break;
                             case ports portInfo:
                                 found.ports = new();
-                                foreach (port portFound in portInfo.port)
+                                if (portInfo.port != null)
                                 {
-                                    if (portFound.state.state1.ToLower().StartsWith("open"))
+                                    foreach (port portFound in portInfo.port)
                                     {
-                                        Port addport = new Port();
-                                        addport.portNum = portFound.portid;
-                                        addport.protocol = portFound.protocol.ToString();
-                                        addport.service = portFound.service.name;
-                                        addport.serviceProduct = portFound.service.product;
-                                        found.ports.Add(addport);
+                                        if (portFound.state.state1.ToLower().StartsWith("open"))
+                                        {
+                                            Port addport = new Port();
+                                            addport.portNum = portFound.portid;
+                                            addport.protocol = portFound.protocol.ToString();
+                                            addport.service = portFound.service.name;
+                                            addport.serviceProduct = portFound.service.product;
+                                            found.ports.Add(addport);
+                                        }
                                     }
                                 }
                                 break;

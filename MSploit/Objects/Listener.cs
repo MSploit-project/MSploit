@@ -73,10 +73,12 @@ namespace MSploit.Objects
                             while(true);
                         }
                         clients.Remove(CClient);
+                        Notification.add("Lost shell", CClient.getIp);
                     }
                     catch
                     {
                         clients.Remove(CClient);
+                        Notification.add("Lost shell", CClient.getIp);
                     }
                 }).Start();
             }
