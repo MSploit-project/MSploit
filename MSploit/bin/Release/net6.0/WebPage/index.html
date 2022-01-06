@@ -287,6 +287,14 @@
                         <input style="width: 90%;display: inline-block;margin-top: 15px" type="text" class="form-control bg-dark text-white" name="" id="commandHolder" placeholder="">
                     </div>
                     <button type="button" class="btn btn-primary" style="position: absolute;right: 15px;bottom: 15px" onclick="$.get('/server/clients/'+clientId+'/run/'+document.getElementById('commandHolder').value); document.getElementById('commandHolder').value = ''">Run command</button>
+                    <script>
+                        $("#commandHolder").keydown(function(event) {
+                            if (event.which === 13) {
+                                $.get('/server/clients/'+clientId+'/run/'+document.getElementById('commandHolder').value)
+                                document.getElementById('commandHolder').value = ''
+                            }
+                        });
+                    </script>
                 </div>
                 
             </div>

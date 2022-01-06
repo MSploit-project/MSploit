@@ -19,3 +19,8 @@ Exploitation tool
 * Nmap
 * Python
 * dotnet 6
+
+## Default credentials
+username: user
+
+password: lkJSV@OiHF#OLJ@$#HJBCDVop
