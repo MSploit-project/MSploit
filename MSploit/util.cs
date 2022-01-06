@@ -89,22 +89,25 @@ namespace MSploit
                         switch (item)
                         {
                             case os osInfo:
-                                foreach (var match in osInfo.osmatch)
+                                if (osInfo.osmatch != null)
                                 {
-                                    String s = "";
-                                    foreach (osclass osClass in match.osclass)
+                                    foreach (var match in osInfo.osmatch)
                                     {
-                                        found.Os = osClass.osfamily.ToLower() switch
+                                        String s = "";
+                                        foreach (osclass osClass in match.osclass)
                                         {
-                                            "linux" => Hosts.OS.linux,
-                                            "windows" => Hosts.OS.win,
-                                            "macos" => Hosts.OS.osx,
-                                            _ => Hosts.OS.other_unknown
-                                        };
-                                        found.OsVer = osClass.osgen;
+                                            found.Os = osClass.osfamily.ToLower() switch
+                                            {
+                                                "linux" => Hosts.OS.linux,
+                                                "windows" => Hosts.OS.win,
+                                                "macos" => Hosts.OS.osx,
+                                                _ => Hosts.OS.other_unknown
+                                            };
+                                            found.OsVer = osClass.osgen;
+                                            break;
+                                        }
                                         break;
                                     }
-                                    break;
                                 }
                                 break;
                             case ports portInfo:
