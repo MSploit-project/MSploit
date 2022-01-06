@@ -46,7 +46,7 @@ public class NormalPagesController : ControllerBase
         if (!util.checkSession(Request)) return new UnauthorizedResult();
         try
         {
-            var data = System.IO.File.OpenRead($@"C:\Users\milan\RiderProjects\MSploit\MSploit\WebPage\Icons\Pcs\{iconUrl}");
+            var data = System.IO.File.OpenRead($@"{Directory.GetCurrentDirectory()}\WebPage\Icons\Pcs\{iconUrl}");
             return File(data, "image/png");
         }
         catch
