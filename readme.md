@@ -15,3 +15,7 @@ Exploitation tool
 ## Planned
 * Plugin system
 * Better remote control payload (through web requests)
+## Requirements
+* Nmap
+* Python
+* dotnet 6
