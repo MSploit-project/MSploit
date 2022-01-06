@@ -17,18 +17,45 @@ namespace MSploit.Objects
         public static void add(String ip, bool online) => List.Add(new Hosts(ip, online));
         public static void add(String ip, bool online, OS Os) => List.Add(new Hosts(ip, online, Os));
         public static void add(String ip, bool online, String lanIp, OS Os) => List.Add(new Hosts(ip, online, lanIp, Os));
-        public static void add(String ip, bool online, String lanIp, OS Os, bool pwned) => List.Add(new Hosts(ip, online, lanIp, Os, pwned));
 
         public int id { get; }
         public String ip { get; set; }
         public bool up { get; set; }
         public List<Port> ports { get; set; }
-        public bool pwned { get; set; }
+
+        public bool pwned
+        {
+            get
+            {
+                foreach (var listener in Listener.Listeners) foreach (var client in listener.clients) if (client.getIp.ToLower().Equals(ip.ToLower())) return true;
+                return false;
+            }
+        }
+
         public String lanIp { get; set; }
         public OS Os { get; set; }
         public String OsVer { get; set; }
         public String HostName { get; set; }
-        
+
+        public List<int> shells
+        {
+            get
+            {
+                List<int> outList = new List<int>();
+                foreach (var listener in Listener.Listeners)
+                {
+                    foreach (var client in listener.clients)
+                    {
+                        if (client.getIp.ToLower().Equals(ip.ToLower()))
+                        {
+                            outList.Add(client.id);
+                        }
+                    }
+                }
+                return outList;
+            }
+        }
+
         public String OsString => Os switch
         {
             OS.linux => "Linux",
@@ -36,7 +63,7 @@ namespace MSploit.Objects
             OS.win => "Windows",
             OS.other_unknown => "Other/Unknown",
             _ => ""
-        } + OsVer;
+        } + " " + OsVer;
         
         public String imageName => Os switch
         {
@@ -47,16 +74,6 @@ namespace MSploit.Objects
             _ => "unix"
         } + (pwned?"-e":"");
 
-        public Hosts(String ip, bool up, String lanIp, OS Os, bool pwned)
-        {
-            id = highestId++;
-            this.ip = ip;
-            this.up = up;
-            this.lanIp = lanIp;
-            this.Os = Os;
-            this.pwned = pwned;
-            ports = new();
-        }
         
         public Hosts(String ip, bool up, String lanIp, OS Os)
         {
@@ -65,7 +82,6 @@ namespace MSploit.Objects
             this.up = up;
             this.lanIp = lanIp;
             this.Os = Os;
-            pwned = false;
             ports = new();
         }
         
@@ -76,7 +92,6 @@ namespace MSploit.Objects
             this.up = up;
             lanIp = "xxx.xxx.xxx.xxx";
             this.Os = Os;
-            pwned = false;
             ports = new();
         }
         
@@ -87,7 +102,6 @@ namespace MSploit.Objects
             this.up = up;
             this.lanIp = lanIp;
             Os = OS.other_unknown;
-            pwned = false;
             ports = new();
         }
         
@@ -98,7 +112,6 @@ namespace MSploit.Objects
             this.up = up;
             lanIp = "xxx.xxx.xxx.xxx";
             Os = OS.other_unknown;
-            pwned = false;
             ports = new();
         }
 

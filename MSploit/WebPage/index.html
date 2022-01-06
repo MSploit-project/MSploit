@@ -100,13 +100,52 @@
                     <div class="tab-pane fade show active" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
                         <div class="form-group">
                             <label for="pyInterp">Python Interpreter</label>
-                            <input type="text" class="form-control bg-dark text-white" name="pyInterp" id="pyInterp" aria-describedby="helpId"
+                            <input type="text" class="form-control bg-dark text-white" name="pyInterp" id="pyInterp" aria-describedby="pythonInterp"
                                    placeholder="">
-                            <small id="helpId" class="form-text text-muted">The command to run to run the python interpreter</small>
+                            <small id="pythonInterp" class="form-text text-muted">The command to run to run the python interpreter</small>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-connections" role="tabpanel" aria-labelledby="pills-connections-tab">
-                        <h3>No connection settings yet...</h3>
+                        <div class="card bg-dark text-white" style="height: 300px;width: 100%;border-color: black;overflow: auto">
+                            <ul id="portsContainer" class="list-group list-group-flush bg-dark text-white">
+                                
+                                
+                                
+                            </ul>
+
+                            <script>
+                                function checkPorts(){
+                                    $.get('/server/ports')
+                                    .done(function (data){
+                                        let elem = document.getElementById('portsContainer')
+                                        let newValue = ""
+                                        for (let i = 0; i < data.length; i++) {
+                                            let port = data[i]
+                                            let num = port.port;
+                                            let htmlcode = `
+                                            <li class="list-group-item bg-dark text-white" style="border-color: grey">
+                                                <div>${num}
+                                                    <div style="position:absolute;right: 10px;top: 1px;">
+                                                        <a class="btn btn-danger" role="button" onclick="$.get('/server/ports/${num}/remove')">Remove</a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            `
+                                            newValue += htmlcode
+                                        }
+                                        elem.innerHTML = newValue;
+                                    })
+                                    setTimeout(checkPorts, 500)
+                                }
+                                checkPorts()
+                            </script>
+                        </div>
+                        <div>
+                            <div class="form-group" style="display: inline-block;width: 80%;">
+                                <input style="width: 90%;display: inline-block;margin-top: 15px" type="text" class="form-control bg-dark text-white" name="" id="portHolder" placeholder="">
+                            </div>
+                            <button type="button" class="btn btn-primary" style="position: absolute;right: 15px;bottom: 15px" onclick="$.get('/server/ports/add', {'port': document.getElementById('portHolder').value}); document.getElementById('portHolder').value = ''">Add port</button>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="pills-plugins" role="tabpanel" aria-labelledby="pills-plugins-tab">
                         <h3>No plugins yet...</h3>
@@ -219,6 +258,60 @@
     </div>
 </div>
 
+<!--Shell Menu-->
+<div class="modal fade text-white" id="shellMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content" style="height: calc(100vh - 60px)">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title">Shell</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-dark">
+                <pre style="position:absolute;left: 15px;right: 15px;top: 10px;bottom: 50px;border: 1px solid black;overflow: auto" class="bg-dark text-white" id="ConsoleOut"></pre>
+                <script>
+                    let clientId = -1
+                    function updateOutPut(){
+                        try {
+                            $.get(`/server/clients/${clientId}/getContent`)
+                            .done(function (data){
+                                document.getElementById('ConsoleOut').innerText = data
+                            })
+                        }
+                        catch (e){}
+                        setTimeout(updateOutPut, 100)
+                    }
+                    updateOutPut()
+                </script>
+                <div>
+                    <div class="form-group" style="display: inline-block;width: 90%;position: absolute;bottom: 15px">
+                        <input style="width: 90%;display: inline-block;margin-top: 15px" type="text" class="form-control bg-dark text-white" name="" id="commandHolder" placeholder="">
+                    </div>
+                    <button type="button" class="btn btn-primary" style="position: absolute;right: 15px;bottom: 15px" onclick="$.get('/server/clients/'+clientId+'/run/'+document.getElementById('commandHolder').value); document.getElementById('commandHolder').value = ''">Run command</button>
+                </div>
+                
+            </div>
+            <div class="modal-footer bg-dark">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let shellModal = document.getElementById('shellMenu')
+    shellModal.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        let button = event.relatedTarget
+        // Extract info from data-bs-* attributes
+        let shell = button.getAttribute('data-bs-id')
+        clientId = shell
+        $.get(`/server/clients/${shell}`)
+        .done(function (data){
+            let ip = data.getIp
+            shellModal.querySelector('.modal-title').innerHTML = "Shell: " + ip;
+        })
+    })
+</script>
+
 <!-- info Menu -->
 <div class="modal fade text-white" id="infoMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -238,6 +331,9 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link"  data-bs-toggle="pill" data-bs-target="#info-vulns" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Vulns</button>
                     </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link"  data-bs-toggle="pill" data-bs-target="#info-shells" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Shells</button>
+                    </li>
                 </ul>
                 <div class="tab-content" id="infotabscontent">
                     <div class="tab-pane fade show active" id="info-main" role="tabpanel" aria-labelledby="pills-general-tab">
@@ -251,6 +347,9 @@
                     <div class="tab-pane fade" id="info-vulns" role="tabpanel" aria-labelledby="pills-plugins-tab">
                         <a target="_blank" href="https://www.exploit-db.com/" type="button" class="btn btn-primary">Visit exploit-db</a>
                         <a target="_blank" href="https://vuldb.com/" type="button" class="btn btn-primary">Visit vuldb</a>
+                    </div>
+                    <div class="tab-pane fade" id="info-shells" role="tabpanel" aria-labelledby="pills-connections-tab">
+                        <ul id="shellsList"></ul>
                     </div>
                 </div>
             </div>
@@ -276,13 +375,21 @@
         let modalTitle = infoModal.querySelector('.modal-title')
         let infoList = infoModal.querySelector('#infoList')
         let portsList = infoModal.querySelector('#portsList')
+        let shellList = infoModal.querySelector('#shellsList')
         
         $.get(`/hosts/${host}`)
         .done(function (data){
             modalTitle.textContent = `Info on ${data.ip}`
-            infoList.innerHTML = portsList.innerHTML = ""//full clear
+            infoList.innerHTML = shellList.innerHTML = portsList.innerHTML = ""//full clear
             function addListItem(text) { infoList.appendChild(document.createElement("li")).appendChild(document.createTextNode(text)) }
             function addPort(info) { portsList.appendChild(document.createElement("li")).appendChild(document.createTextNode(info)) }
+            function addShell(id) { 
+                shellList.innerHTML += `
+<li>
+    <button data-bs-id="${id}" data-bs-toggle="modal" data-bs-target="#shellMenu" type="button" class="btn btn-primary">Shell: ${id}</button>
+</li>
+                `
+            }
             
             addListItem("Ip: " + data.ip)
             addListItem("Lan Ip: " + data.lanIp)
@@ -298,9 +405,12 @@
                     protocol = port.protocol
                 addPort(`${portNum}/${protocol}: ${service}, ${serviceProduct}`)
             }
+
+            for (let s = 0; s < data.shells.length; s++) {
+                const shellId = data.shells[s]
+                addShell(shellId)
+            }
         })
-        
-        //modalBodyInput.value = 
     })
 
 </script>

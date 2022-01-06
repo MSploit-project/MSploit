@@ -53,7 +53,7 @@ public class HostsController : ControllerBase
         return Hosts.List;
     }
     
-    [HttpPost("hosts/{id}/delete")]
+    [HttpPost("hosts/{id:int}/delete")]
     public ActionResult<bool> deleteHost(int id)
     {
         if (!util.checkSession(Request)) return new UnauthorizedResult();
@@ -76,7 +76,7 @@ public class HostsController : ControllerBase
         return exists != -1;
     }
 
-    [HttpGet("hosts/{id}")]
+    [HttpGet("hosts/{id:int}")]
     public ActionResult<Hosts> getHost(int id)
     {
         if (!util.checkSession(Request)) return new UnauthorizedResult();
