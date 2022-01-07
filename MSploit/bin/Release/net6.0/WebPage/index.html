@@ -278,9 +278,10 @@
                     <div style="width: 100%" class="form-group">
                         <label style="width: 100%" class="form-label">
                             <div id="portcountlabel">Scan 1000 most common ports</div><br>
-                            <input style="width: 100%" class="form-range" type="range" defaultValue="1000" min="0" max="65535" name="portcount" onchange="document.getElementById('portcountlabel').innerText = `Scan ${value} most common ports`">
+                            <input style="width: 100%" class="form-range" type="range" value="1000" defaultValue="1000" min="0" max="65535" name="portcount" onchange="document.getElementById('portcountlabel').innerText = `Scan ${value} most common ports`">
                         </label>
                     </div>
+                    
                     <div class="form-group">
                         <label for="scanSpeed">Scan Speed</label>
                         <select class="form-control bg-dark text-white" name="scanSpeed" id="scanSpeed">
