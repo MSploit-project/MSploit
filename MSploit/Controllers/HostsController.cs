@@ -35,11 +35,11 @@ public class HostsController : ControllerBase
         string dir = $"{Directory.GetCurrentDirectory()}\\scans\\{host}.xml";
         Notification.add("Nmap scan started!", $"Target: {host}");
         String command = $"{host} {scanType} {fast} {ver} {osd} {online} {con} --top-ports {portcount} {scanSpeed} {customArgs} -oX \"{dir}\"";
-        Console.WriteLine($"Running nmap.exe {command}");
+        Console.WriteLine($"Running nmap {command}");
         new Thread(() =>
         {
             Directory.CreateDirectory($"{Directory.GetCurrentDirectory()}\\scans");
-            util.runCmd("nmap.exe", command);
+            util.runCmd(Settings.settings.nmap, command);
             util.updateHostFromScan(host, dir);
         }).Start();
         return new RedirectResult("/");
