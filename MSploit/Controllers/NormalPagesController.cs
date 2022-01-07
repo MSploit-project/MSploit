@@ -6,13 +6,14 @@ using System.Security.Cryptography;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MSploit;
+using MSploit.Objects;
 
 [ApiController]
 public class NormalPagesController : ControllerBase
 {
     //basic credentials for now
-    private string login => "user";
-    private string password => "lkJSV@OiHF#OLJ@$#HJBCDVop";
+    private string login => Settings.settings.userName;
+    private string password => Settings.settings.password;
     public static List<string> validAuth = new ();
 
     [HttpGet("")]

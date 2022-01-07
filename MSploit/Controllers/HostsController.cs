@@ -29,14 +29,13 @@ public class HostsController : ControllerBase
     }
 
     [HttpGet("hosts/new/scan")]
-    public IActionResult scanHost(String host, String? scanType, String? fast, String? ver, String? aggr, String? osd)
+    public IActionResult scanHost(String host, String? scanType, String? fast, String? ver, String? osd, String? online, String? con, int portcount, String? customArgs, String? scanSpeed)
     {
         if (!util.checkSession(Request)) return new UnauthorizedResult();
         string dir = $"{Directory.GetCurrentDirectory()}\\scans\\{host}.xml";
         Notification.add("Nmap scan started!", $"Target: {host}");
-        String command = $"{host} {scanType} {fast} {ver} {aggr} {osd} -oX \"{dir}\"";
+        String command = $"{host} {scanType} {fast} {ver} {osd} {online} {con} --top-ports {portcount} {scanSpeed} {customArgs} -oX \"{dir}\"";
         Console.WriteLine($"Running nmap.exe {command}");
-        //TODO: scan through nmap
         new Thread(() =>
         {
             Directory.CreateDirectory($"{Directory.GetCurrentDirectory()}\\scans");

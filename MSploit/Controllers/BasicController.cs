@@ -62,10 +62,13 @@ namespace MSploit.Controllers
         }
 
         [HttpGet("server/settings/set")]
-        public ActionResult setSettings(string pyInterp)
+        public ActionResult setSettings(string pyInterp, string nmapPath, string userName, string password)
         {
             if (!util.checkSession(Request)) return new UnauthorizedResult();
             Settings.settings.pyInterp = pyInterp;
+            Settings.settings.nmap = nmapPath;
+            Settings.settings.userName = userName;
+            Settings.settings.password = password;
             return new RedirectResult("/");
         }
 

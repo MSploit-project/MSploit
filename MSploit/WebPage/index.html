@@ -99,10 +99,28 @@
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
                         <div class="form-group">
-                            <label for="pyInterp">Python Interpreter</label>
+                            <label for="pyInterp">Python interpreter</label>
                             <input type="text" class="form-control bg-dark text-white" name="pyInterp" id="pyInterp" aria-describedby="pythonInterp"
                                    placeholder="">
                             <small id="pythonInterp" class="form-text text-muted">The command to run to run the python interpreter</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="nmapPath">Nmap command</label>
+                            <input type="text" class="form-control bg-dark text-white" name="nmapPath" id="nmapPath" aria-describedby="nmapPatha"
+                                   placeholder="">
+                            <small id="nmapPatha" class="form-text text-muted">The command to run to run nmap</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="userName">Username</label>
+                            <input type="text" class="form-control bg-dark text-white" name="userName" id="userName" aria-describedby="userNamea"
+                                   placeholder="">
+                            <small id="userNamea" class="form-text text-muted">Change the username</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control bg-dark text-white" name="password" id="password" aria-describedby="passworda"
+                                   placeholder="">
+                            <small id="passworda" class="form-text text-muted">Change the password</small>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-connections" role="tabpanel" aria-labelledby="pills-connections-tab">
@@ -168,6 +186,9 @@
         $.get("/server/settings")
         .done(function (data){
             document.getElementById("pyInterp").value = data.pyInterp
+            document.getElementById("nmapPath").value = data.nmapPath
+            document.getElementById("userName").value = data.userName
+            document.getElementById("password").value = data.password
         })
     })
 </script>
@@ -184,7 +205,7 @@
                 <div class="modal-body bg-dark">
                     <div class="form-group">
                         <label for="ipfield">Ip:</label>
-                        <input type="text" class="form-control" name="host" id="ipfield" aria-describedby="helpId"
+                        <input type="text" class="form-control bg-dark text-white" name="host" id="ipfield" aria-describedby="helpId"
                                placeholder="xxx.xxx.xxx.xxx">
                     </div>
                 </div>
@@ -210,12 +231,12 @@
                 <div class="modal-body bg-dark">
                     <div class="form-group">
                         <label for="ipScanField">Ip:</label>
-                        <input type="text" class="form-control" name="host" id="ipScanField" aria-describedby="helpId"
+                        <input type="text" class="form-control bg-dark text-white" name="host" id="ipScanField" aria-describedby="helpId"
                                placeholder="xxx.xxx.xxx.xxx">
                     </div>
                     <div class="form-group">
                         <label for="scanType">Scan Type</label>
-                        <select class="form-control" name="scanType" id="scanType">
+                        <select class="form-control bg-dark text-white" name="scanType" id="scanType">
                             <option value="">Pick an option</option>
                             <option value="-sT">TCP</option>
                             <option value="-sU">UDP</option>
@@ -226,27 +247,57 @@
                     </div>
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="fast" value="-F">
-                            Fast port scan
+                            <input type="checkbox" class="form-check-input bg-dark" name="fast" value="-F">
+                            Fast mode - Scan fewer ports than the default scan
                         </label>
                     </div>
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="ver" value="-sV" checked>
+                            <input type="checkbox" class="form-check-input bg-dark" name="ver" value="-sV" checked>
                             Service version detection
                         </label>
                     </div>
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="aggr" value="-A">
-                            Agressive Scan
+                            <input type="checkbox" class="form-check-input bg-dark" name="osd" value="-O" checked>
+                            Enable OS detection
                         </label>
                     </div>
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="osd" value="-O" checked>
-                            OS detect
+                            <input type="checkbox" class="form-check-input bg-dark" name="online" value="-Pn">
+                            Treat host as online - skip host discovery
                         </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input bg-dark" name="con" value="-r">
+                            Scan ports consecutively - don't randomize
+                        </label>
+                    </div>
+                    <div style="width: 100%" class="form-group">
+                        <label style="width: 100%" class="form-label">
+                            <div id="portcountlabel">Scan 1000 most common ports</div><br>
+                            <input style="width: 100%" class="form-range" type="range" defaultValue="1000" min="0" max="65535" name="portcount" onchange="document.getElementById('portcountlabel').innerText = `Scan ${value} most common ports`">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="scanSpeed">Scan Speed</label>
+                        <select class="form-control bg-dark text-white" name="scanSpeed" id="scanSpeed">
+                            <option value="">Pick an option</option>
+                            <option value="-T0">0: paranoid IDS evasion</option>
+                            <option value="-T1">1: sneaky IDS evasion</option>
+                            <option value="-T2">2: polite IDS evasion</option>
+                            <option value="-T3">3: normal IDS evasion</option>
+                            <option value="-T4">4: aggressive speed scan</option>
+                            <option value="-T5">5: insane speed scan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ipScanField">Custom args:</label>
+                        <input type="text" class="form-control bg-dark text-white" name="customArgs" id="customArgs" aria-describedby="customArgsa"
+                               placeholder="-g 22...">
+                        <small id="customArgsa">Custom arguments to put in nmap scan command</small>
                     </div>
                 </div>
                 <div class="modal-footer bg-dark">
