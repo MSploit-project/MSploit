@@ -67,9 +67,12 @@ namespace MSploit
             using (var xmlStream = new StreamReader(resultFile))
             {
                 result = xmlSerializer.Deserialize(xmlStream) as nmaprun;
-                foreach (host host1 in result.Items)
+                foreach (var host1var in result.Items)
                 {
-                    Hosts found = new Hosts(host, true);
+                    if (host1var != null && host1var.GetType() == typeof(host))
+                    {
+                        NmapXmlParser.host host1 = (host) host1var;
+                        Hosts found = new Hosts(host, true);
                     bool alreadyIn = false;
                     foreach (var listHost in Hosts.List)
                     {
@@ -138,6 +141,7 @@ namespace MSploit
                     }
 
                     if (!alreadyIn) Hosts.List.Add(found);
+                    }
                 }
             }
             Notification.add("Nmap done!", $"Nmap for {host} completed!");
